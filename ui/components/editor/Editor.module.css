@@ -1,0 +1,9 @@
+.editor {
+  box-sizing: border-box;
+  border: 0;
+  resize: none;
+  outline: none;
+  flex: 1;
+  padding: 20px;
+  box-shadow: 5px 5px 10px #80808014;
+}
