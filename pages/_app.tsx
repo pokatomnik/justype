@@ -1,7 +1,15 @@
 import Head from 'next/head';
 import '../styles/globals.css';
 
-export default function MyApp({ Component, pageProps }) {
+interface IMyAppProps<CP extends object> {
+  Component: React.ComponentType<CP>;
+  pageProps: CP;
+}
+
+export default function MyApp<CP extends object>({
+  Component,
+  pageProps,
+}: IMyAppProps<CP>) {
   return (
     <>
       <Head>

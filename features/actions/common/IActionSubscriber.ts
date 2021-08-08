@@ -1,3 +1,3 @@
-export interface IActionSubscriber {
-  subscribe: (this: this, subscriber: () => void) => () => void;
+export interface IActionSubscriber<E extends unknown> {
+  subscribe: (subscriber: (evt: E) => void) => () => void;
 }

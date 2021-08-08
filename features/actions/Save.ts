@@ -1,12 +1,13 @@
 import type { IActionSubscriber } from './common/IActionSubscriber';
 import { GlobalShortcut } from './desktop/GlobalShortcut';
 import { getTouchPointsNumber } from '../detection';
+import { TouchSave } from './mobile/TouchSave';
 
-export class Save implements IActionSubscriber {
-  // TODO implement the same for mobile
-  private save: IActionSubscriber = new GlobalShortcut('s');
+export class Save implements IActionSubscriber<void> {
+  private save: IActionSubscriber<void> =
+    getTouchPointsNumber() > 0 ? new TouchSave() : new GlobalShortcut('s');
 
-  subscribe(this: this, subscriber: () => void) {
+  public subscribe(subscriber: () => void) {
     return this.save.subscribe(subscriber);
   }
 }
