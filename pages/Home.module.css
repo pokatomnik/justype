@@ -1,7 +1,6 @@
 .container {
   width: 100vw;
   height: 100vh;
-  background-color: #e6e6e6;
   padding: 20px 25vw;
   box-sizing: border-box;
   display: flex;
@@ -10,6 +9,6 @@
 
 @media screen and (max-width: 800px) {
   .container {
-    padding: 0;
+    padding: 10px;
   }
 }
