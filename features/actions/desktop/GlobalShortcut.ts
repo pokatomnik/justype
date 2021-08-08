@@ -1,10 +1,10 @@
 import { isMacKeyboard } from '../../detection/MacKeyboard';
-import type { IActionSubscriber } from './IActionSubscriber';
+import type { IActionSubscriber } from '../common/IActionSubscriber';
 
-export abstract class Key implements IActionSubscriber {
+export class GlobalShortcut implements IActionSubscriber {
   private readonly useCmdKey = isMacKeyboard();
 
-  protected abstract key: string;
+  public constructor(private readonly key: string) {}
 
   public subscribe(this: this, subscriber: () => void) {
     const keyPressHandler = (evt: KeyboardEvent) => {
