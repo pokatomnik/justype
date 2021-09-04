@@ -6,6 +6,8 @@ import { EditorState } from './EditorState';
 import { LocalSaver } from './LocalSaver';
 
 export class Editor extends React.Component<object, object> {
+  private textareaRef = React.createRef<HTMLTextAreaElement>();
+
   private readonly editorState = new EditorState(new LocalSaver('text'));
 
   private setText = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -14,6 +16,7 @@ export class Editor extends React.Component<object, object> {
 
   public componentDidMount() {
     this.editorState.initialize();
+    this.textareaRef.current?.focus();
   }
 
   public render() {
@@ -21,6 +24,7 @@ export class Editor extends React.Component<object, object> {
       <Observer>
         {() => (
           <textarea
+            ref={this.textareaRef}
             placeholder="Type here..."
             className={styles.editor}
             value={this.editorState.text}
