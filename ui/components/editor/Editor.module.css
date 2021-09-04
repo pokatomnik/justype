@@ -6,4 +6,5 @@
   flex: 1;
   font-family: 'Fanta', monospace;
   padding: 20px;
+  white-space: pre;
 }
