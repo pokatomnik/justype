@@ -4,5 +4,6 @@
   resize: none;
   outline: none;
   flex: 1;
-  font-family: sans-serif;
+  font-family: 'Fanta', monospace;
+  padding: 20px;
 }

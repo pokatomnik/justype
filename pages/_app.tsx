@@ -13,6 +13,12 @@ export default function MyApp<CP extends object>({
   return (
     <>
       <Head>
+        <link
+          rel="preload"
+          href="/fonts/fanta.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta
