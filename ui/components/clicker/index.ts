@@ -1,0 +1,1 @@
+export { makeClicker } from './Clicker';

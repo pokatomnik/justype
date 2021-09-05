@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable } from 'mobx';
-import { schedule } from './Timer';
+import { schedule } from '../../../features';
 import type { ISaver } from './ISaver';
 
 export class EditorState {
