@@ -8,5 +8,9 @@ interface IMarkdownWrapperProps {
 export function MarkdownWrapper(
   props: React.PropsWithChildren<IMarkdownWrapperProps>
 ) {
-  return <div onClick={props.onClick}>{props.children}</div>;
+  return (
+    <div className={styles.wrapper} onClick={props.onClick}>
+      {props.children}
+    </div>
+  );
 }
