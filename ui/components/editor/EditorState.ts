@@ -7,11 +7,16 @@ export class EditorState {
 
   private _text: string = '';
 
+  private _markdownEnabled = false;
+
   public constructor(private readonly saver: ISaver) {
-    makeObservable<this, '_text'>(this, {
+    makeObservable<this, '_text' | '_markdownEnabled'>(this, {
       _text: observable,
+      _markdownEnabled: observable,
       text: computed,
+      markdownEnabled: computed,
       setText: action,
+      toggleMarkdown: action.bound,
     });
   }
 
@@ -23,6 +28,14 @@ export class EditorState {
 
   public get text() {
     return this._text;
+  }
+
+  public get markdownEnabled() {
+    return this._markdownEnabled;
+  }
+
+  public toggleMarkdown() {
+    this._markdownEnabled = !this._markdownEnabled;
   }
 
   public setText(text: string) {

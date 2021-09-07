@@ -5,6 +5,8 @@ import styles from './Editor.module.css';
 import { EditorState } from './EditorState';
 import { LocalSaver } from './LocalSaver';
 import { makeClicker } from '../clicker';
+import { Markdown } from '../markdown';
+import { If } from '../conditional';
 
 export class Editor extends React.Component<object, object> {
   private static Clicker = makeClicker({
@@ -25,30 +27,53 @@ export class Editor extends React.Component<object, object> {
     this.textareaRef.current?.focus();
   }
 
-  private handleDoubleClick = () => {
-    // TODO add interaction
-  };
-
   public render() {
     return (
-      <Editor.Clicker<HTMLTextAreaElement>
-        clickHandler={this.handleDoubleClick}
-      >
-        {(onClick) => (
-          <Observer>
-            {() => (
-              <textarea
-                ref={this.textareaRef}
-                placeholder="Type here..."
-                className={styles.editor}
-                value={this.editorState.text}
-                onChange={this.setText}
-                onClick={onClick}
-              />
-            )}
-          </Observer>
+      <Observer>
+        {() => (
+          <React.Fragment>
+            <If cond={this.editorState.markdownEnabled}>
+              {() => (
+                <Editor.Clicker<HTMLDivElement>
+                  clickHandler={this.editorState.toggleMarkdown}
+                >
+                  {(onClick) => (
+                    <Observer>
+                      {() => (
+                        <Markdown onClick={onClick}>
+                          {this.editorState.text}
+                        </Markdown>
+                      )}
+                    </Observer>
+                  )}
+                </Editor.Clicker>
+              )}
+            </If>
+            <If cond={!this.editorState.markdownEnabled}>
+              {() => (
+                <Editor.Clicker<HTMLTextAreaElement>
+                  clickHandler={this.editorState.toggleMarkdown}
+                >
+                  {(onClick) => (
+                    <Observer>
+                      {() => (
+                        <textarea
+                          ref={this.textareaRef}
+                          placeholder="Type here... (Double click to toggle Markdown View mode)"
+                          className={styles.editor}
+                          value={this.editorState.text}
+                          onChange={this.setText}
+                          onClick={onClick}
+                        />
+                      )}
+                    </Observer>
+                  )}
+                </Editor.Clicker>
+              )}
+            </If>
+          </React.Fragment>
         )}
-      </Editor.Clicker>
+      </Observer>
     );
   }
 }
