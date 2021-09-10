@@ -51,7 +51,7 @@ export class Downloader {
     );
   }
 
-  readonly mimeOptions = { type: 'text/plain;charset=utf-8' };
+  private readonly mimeOptions = { type: 'text/plain;charset=utf-8' };
 
   private readonly blobURL: string;
 
