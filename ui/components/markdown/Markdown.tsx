@@ -5,7 +5,6 @@ import * as Elements from './Elements';
 import { MarkdownWrapper } from './MarkdownWrapper';
 
 interface IMarkdownProps {
-  onClick: (evt: React.MouseEvent<HTMLDivElement>) => void;
   children: string;
 }
 
@@ -21,7 +20,7 @@ export class Markdown extends React.Component<IMarkdownProps> {
 
   public render() {
     return (
-      <MarkdownWrapper onClick={this.props.onClick}>
+      <MarkdownWrapper>
         <ReactMarkdown options={Markdown.options}>
           {this.props.children}
         </ReactMarkdown>

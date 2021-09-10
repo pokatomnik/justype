@@ -1,11 +1,20 @@
 import * as React from 'react';
 import styles from './Home.module.css';
-import { Editor } from '../ui';
+import { Editor, ControlBar } from '../ui';
 
 export default function Home() {
+  const [markdownEnabled, setMarkdownEabled] = React.useState(false);
+
+  const toggleMarkdownClick = React.useCallback(() => {
+    setMarkdownEabled((markdownEnabled) => {
+      return !markdownEnabled;
+    });
+  }, []);
+
   return (
     <div className={styles.container}>
-      <Editor />
+      <ControlBar onToggleMarkdownClick={toggleMarkdownClick} />
+      <Editor markdownEnabled={markdownEnabled} />
     </div>
   );
 }

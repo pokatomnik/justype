@@ -3,27 +3,18 @@ import styles from './Editor.module.css';
 
 import { EditorSaver } from './EditorSaver';
 import { LocalSaver } from './LocalSaver';
-import { makeClicker } from '../clicker';
 import { Markdown } from '../markdown';
 import { If } from '../conditional';
 
-const Clicker = makeClicker({
-  clicksToGo: 2,
-  threshold: 500,
-});
+interface IEditorProps {
+  markdownEnabled: boolean;
+}
 
-export function Editor() {
+export function Editor(props: IEditorProps) {
   const [text, setText] = React.useState('');
-  const [markdownEnabled, setMakdownEnabled] = React.useState(false);
 
   const editorSaver = React.useMemo(() => {
     return new EditorSaver(new LocalSaver('text'));
-  }, []);
-
-  const toggleMarkdown = React.useCallback(() => {
-    setMakdownEnabled((markdownEnabled) => {
-      return !markdownEnabled;
-    });
   }, []);
 
   const textareaHandleChange = React.useCallback(
@@ -44,27 +35,16 @@ export function Editor() {
 
   return (
     <React.Fragment>
-      <If cond={markdownEnabled}>
+      <If cond={props.markdownEnabled}>{() => <Markdown>{text}</Markdown>}</If>
+      <If cond={!props.markdownEnabled}>
         {() => (
-          <Clicker<HTMLDivElement> clickHandler={toggleMarkdown}>
-            {(onClick) => <Markdown onClick={onClick}>{text}</Markdown>}
-          </Clicker>
-        )}
-      </If>
-      <If cond={!markdownEnabled}>
-        {() => (
-          <Clicker<HTMLTextAreaElement> clickHandler={toggleMarkdown}>
-            {(onClick) => (
-              <textarea
-                ref={textareaRef}
-                placeholder="Type here... (Double click to toggle Markdown View mode)"
-                className={styles.editor}
-                value={text}
-                onChange={textareaHandleChange}
-                onClick={onClick}
-              />
-            )}
-          </Clicker>
+          <textarea
+            ref={textareaRef}
+            placeholder="Type here... (Double click to toggle Markdown View mode)"
+            className={styles.editor}
+            value={text}
+            onChange={textareaHandleChange}
+          />
         )}
       </If>
     </React.Fragment>
