@@ -1,4 +1,4 @@
-import { schedule } from '../../../features';
+import { schedule } from '../timer';
 import type { ISaver } from './ISaver';
 
 export class EditorSaver {

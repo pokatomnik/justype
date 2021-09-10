@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { Downloader } from '../features';
 import '../styles/globals.css';
 
 interface IMyAppProps<CP extends object> {
@@ -53,7 +54,9 @@ export default function MyApp<CP extends object>({
         <meta name="msapplication-TileColor" content="#2d89ef" />
         <meta name="theme-color" content="#664aff" />
       </Head>
-      <Component {...pageProps} />
+      <Downloader.DownloadProvider>
+        <Component {...pageProps} />
+      </Downloader.DownloadProvider>
     </>
   );
 }
