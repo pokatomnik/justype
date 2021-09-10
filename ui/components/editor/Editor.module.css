@@ -3,7 +3,7 @@
   border: 0;
   resize: none;
   outline: none;
-  flex: 1;
+  flex: 1 1 100%;
   font-family: 'Fanta', monospace;
   padding: 20px;
   white-space: pre;
