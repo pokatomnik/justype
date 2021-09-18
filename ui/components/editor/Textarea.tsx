@@ -23,7 +23,7 @@ export function Textarea(props: ITextareaProps) {
   return (
     <textarea
       ref={textareaRef}
-      placeholder="Type here... (Double click to toggle Markdown View mode)"
+      placeholder="Type here..."
       className={styles.textarea}
       value={props.text}
       onChange={textareaHandleChange}
