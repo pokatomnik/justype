@@ -16,7 +16,7 @@ export function Textarea(props: ITextareaProps) {
     [props.onChange]
   );
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     textareaRef.current?.focus();
   }, []);
 
