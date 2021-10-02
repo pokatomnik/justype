@@ -1,11 +1,13 @@
 import Head from 'next/head';
-import { Downloader } from '../features';
+import { Downloader, makeBroadcastProvider } from '../features';
 import '../styles/globals.css';
 
 interface IMyAppProps<CP extends object> {
   Component: React.ComponentType<CP>;
   pageProps: CP;
 }
+
+const BroadcastProvider = makeBroadcastProvider('justype_text');
 
 export default function MyApp<CP extends object>({
   Component,
@@ -54,9 +56,11 @@ export default function MyApp<CP extends object>({
         <meta name="msapplication-TileColor" content="#2d89ef" />
         <meta name="theme-color" content="#664aff" />
       </Head>
-      <Downloader.DownloadProvider>
-        <Component {...pageProps} />
-      </Downloader.DownloadProvider>
+      <BroadcastProvider>
+        <Downloader.DownloadProvider>
+          <Component {...pageProps} />
+        </Downloader.DownloadProvider>
+      </BroadcastProvider>
     </>
   );
 }
